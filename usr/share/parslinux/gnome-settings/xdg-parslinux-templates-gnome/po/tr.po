@@ -1,17 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Fatih Altun <fatih.altun@pardus.org.tr>, 2023.
+# Pars Linux Developers <dev@parslinux.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 17:39+0300\n"
-"PO-Revision-Date: 2023-06-15 17:41+0300\n"
-"Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
-"Language-Team: Turkish <dev@pardus.org.tr>\n"
+"PO-Revision-Date: 2026-10-17 15:40+0300\n"
+"Last-Translator: Pars Linux Developers <dev@parslinux.org>\n"
+"Language-Team: Turkish <dev@parslinux.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
