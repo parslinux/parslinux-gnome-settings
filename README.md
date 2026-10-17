@@ -110,10 +110,30 @@ sudo apt-get install -f
 
 ## 📖 Dokümantasyon
 
-Daha ayrıntılı bilgi için [docs/](docs/) klasöründeki belgelere göz atabilirsiniz:
-- 🏗️ [Mimari ve Yapı ([`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md))](docs/ARCHITECTURE.md)
-- ⚙️ [GSettings ve DConf Ayar Rehberi ([`docs/GSETTINGS_DCONF_GUIDE.md`](docs/GSETTINGS_DCONF_GUIDE.md))](docs/GSETTINGS_DCONF_GUIDE.md)
-- 📦 [Kurulum ve Paketleme Rehberi ([`docs/INSTALL.md`](docs/INSTALL.md))](docs/INSTALL.md)
+Tüm mimari standartlar, kılavuzlar ve yasal şartlar [docs/](docs/) klasöründe yer almaktadır:
+
+| Doküman | Açıklama |
+|---|---|
+| 🏗️ [ARCHITECTURE.md](docs/ARCHITECTURE.md) | GNOME mimarisi, katmanlar ve dizin sorumlulukları |
+| 📝 [CHANGELOG.md](docs/CHANGELOG.md) | Sürüm geçmişi ve değişiklik kayıtları |
+| 🤖 [CLAUDE.md](docs/CLAUDE.md) | Yapay zeka ve geliştirici asistan kılavuzu |
+| 💻 [CLI_REFERENCE.md](docs/CLI_REFERENCE.md) | Uçbirim komutları ve betik parametreleri |
+| 🤝 [CONTRIBUTING.md](docs/CONTRIBUTING.md) | Katkıda bulunma yönergeleri ve PR kuralları |
+| 💾 [DATA_SAVING_GUIDE.md](docs/DATA_SAVING_GUIDE.md) | Kullanıcı ayarlarının korunması ve yedekleme |
+| 📦 [FLATPAK_PACKAGING.md](docs/FLATPAK_PACKAGING.md) | Flatpak portal ve tema uyumluluğu |
+| 🐆 [FORK.md](docs/FORK.md) | Çatallama beyannamesi ve köken bilgisi |
+| ⚙️ [GSETTINGS_DCONF_GUIDE.md](docs/GSETTINGS_DCONF_GUIDE.md) | GSettings override ve dconf ayarları referansı |
+| 📦 [INSTALL.md](docs/INSTALL.md) | Kurulum, test ve paketleme kılavuzu |
+| 💳 [PAYMENT_INTEGRATION.md](docs/PAYMENT_INTEGRATION.md) | Topluluk desteği ve açık kaynak bağış ilkeleri |
+| 📊 [progress.md](docs/progress.md) | Geliştirme ilerleme durumu ve yol haritası |
+| ⚖️ [SARTLAR.md](docs/SARTLAR.md) | Kullanım şartları ve sorumluluk reddi beyanı (TR) |
+| 🔒 [SECURITY.md](docs/SECURITY.md) | Güvenlik politikası ve açık bildirim kanalları |
+| 🏢 [SELF_HOSTING_GUIDE.md](docs/SELF_HOSTING_GUIDE.md) | Kendi sunucunda/kurumunda barındırma ve dağıtım |
+| ⚖️ [TERMS.md](docs/TERMS.md) | Terms of use and liability disclaimer (EN) |
+| 🧪 [TESTING.md](docs/TESTING.md) | Sözdizim, şablon ve runtime test prosedürleri |
+| 🌍 [TRANSLATION_GUIDE.md](docs/TRANSLATION_GUIDE.md) | Çok dillilik ve gettext PO/POT yerelleştirme |
+| 🔗 [UYGULAMA_BAGLAMA.md](docs/UYGULAMA_BAGLAMA.md) | Diğer Pars Linux uygulamalarını panele/şablonlara bağlama |
+| 🏷️ [VERSION.md](docs/VERSION.md) | Sürümleme kuralları ve versiyon takvimi |
 
 ---
 

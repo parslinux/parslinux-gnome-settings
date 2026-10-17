@@ -1,63 +1,74 @@
-# 🏗️ ParsLinux GNOME Settings — Mimari Dokümantasyonu
+# 🏗️ ParsLinux GNOME Settings — Mimari Dokümantasyonu (ARCHITECTURE.md)
 
-Bu belge, `parslinux-gnome-settings` paketinin iç yapısını, GNOME yapılandırma katmanlarını (GSettings, dconf, autostart) ve şablon mekanizmasını açıklamaktadır.
+Bu belge, **ParsLinux GNOME Settings** (`parslinux-gnome-settings`) paketinin mimari katmanlarını, GNOME masaüstü bileşenleri arasındaki veri akışını, sistem önceliklerini ve dizin organizasyonunu detaylandırmaktadır.
 
 ---
 
-## 1. GNOME Yapılandırma Katmanları
-
-Pars Linux GNOME masaüstünde iki temel ayar mekanizması kullanılır:
+## 📌 1. Sistematik Mimari Şeması
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│                   Kullanıcı Oturumu                    │
-│   (Kullanıcının kendi değiştirdiği dconf/gsettings)    │
+│                   Kullanıcı Katmanı                    │
+│   • ~/.config/dconf/user (Kullanıcı dconf DB'si)       │
+│   • ~/Şablonlar (Otomatik üretilen kullanıcı belgeleri)│
+└───────────────────────────┬────────────────────────────┘
+                            │ (Varsayılanları çeker)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│           DConf Sistem Profili Katmanı                 │
+│   • /etc/dconf/profile/user (Profil tanımı)            │
+│   • /etc/dconf/db/local.d/20-parslinux (Ayarlar)       │
+│   • /etc/dconf/db/local (Derlenmiş sistem dconf DB'si) │
+└───────────────────────────┬────────────────────────────┘
+                            │ (Fallback & Şema tabanı)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│              GSettings Override Katmanı                │
+│   • /usr/share/glib-2.0/schemas/                       │
+│     └── 20_parslinux-gnome-settings.gschema.override   │
+│   • /usr/share/glib-2.0/schemas/gschemas.compiled      │
 └───────────────────────────┬────────────────────────────┘
                             │
                             ▼
 ┌────────────────────────────────────────────────────────┐
-│              DConf Profili (/etc/dconf)                │
-│    • /etc/dconf/profile/user                           │
-│    • /etc/dconf/db/local.d/20-parslinux                │
-│   (Dash-to-Panel ve sistem geneli zorunlu/varsayılan)  │
-└───────────────────────────┬────────────────────────────┘
-                            │
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│      GSettings Overrides (/usr/share/glib-2.0)         │
-│    • 20_parslinux-gnome-settings.gschema.override      │
-│   (Favori uygulamalar, yazı tipleri, pencere düzeni)   │
+│             Varlıklar ve Başlatıcılar                  │
+│   • /usr/share/parslinux/gnome-settings/               │
+│     ├── start-parslinux-gnome.svg                      │
+│     └── xdg-parslinux-templates-gnome/                 │
+│   • /etc/xdg/autostart/                                │
+│     └── xdg-parslinux-templates-gnome.desktop          │
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Bileşenler
+## ⚙️ 2. Yapılandırma Katmanlarının Öncelik Sıralaması
 
-### A. GSettings Override (`debian/parslinux-gnome-settings.gsettings-override`)
-- Paket derlendiğinde veya `install.sh` çalıştırıldığında `/usr/share/glib-2.0/schemas/20_parslinux-gnome-settings.gschema.override` olarak yerleştirilir.
-- `glib-compile-schemas` çalıştırıldığında gschemas.compiled içine dahil olur.
-- Yeni oluşturulan kullanıcıların masaüstü varsayılanlarını belirler.
+1. **User Database (`~/.config/dconf/user`):** Kullanıcının GNOME Ayarları (gnome-control-center) veya dconf-editor ile doğrudan yaptığı değişiklikler en yüksek önceliğe sahiptir.
+2. **System Database (`/etc/dconf/db/local`):** `/etc/dconf/db/local.d/20-parslinux` içindeki Dash-to-Panel ve sistem geneli görsel zorunluluklar burada tutulur.
+3. **GSettings Vendor Overrides (`/usr/share/glib-2.0/schemas/`):** Öncelik seviyesi `20` olan `20_parslinux-gnome-settings.gschema.override`, standart GNOME şemalarını Pars Linux dağıtım tercihlerine göre ezerek ilk oturumda yükler.
 
-### B. DConf Veritabanı ve Profili (`dconf/`)
-- `dconf/user`: `/etc/dconf/profile/user` dosyasına kurulur. Profil tanımlar:
-  ```ini
-  user-db:user
-  system-db:local
-  ```
-- `dconf/20-parslinux`: `/etc/dconf/db/local.d/20-parslinux` dosyasına kurulur. Dash-to-Panel uzantısının simgesini, şeffaflığını ve davranışını belirler.
-- `dconf update` komutu çalıştırıldığında `/etc/dconf/db/local` ikili veritabanı derlenir.
+---
 
-### C. Şablon Mekanizması (`usr/share/parslinux/gnome-settings/xdg-parslinux-templates-gnome`)
-- Kullanıcı ilk oturum açtığında `/etc/xdg/autostart/xdg-parslinux-templates-gnome.desktop` otomatik devreye girer.
-- Script kullanıcının ev dizinindeki `~/.config/parslinux/gnome-templates` dosyasını kontrol eder.
-- Eğer dosya yoksa ve kullanıcının `~/Şablonlar` dizini boşsa:
-  - Sunum (`Presentation.odp`)
-  - Hesap Tablosu (`Spreadsheet.ods`)
-  - Kelime İşlemci (`Word Processor.odt`)
-  - Metin Belgesi (`Text Document`)
-  dosyalarını kullanıcının yerel dilinde (Türkçe vb.) adlandırarak şablon klasörüne kopyalar.
+## 📂 3. Dizin ve Dosya Sorumlulukları
 
-### D. Marka & Görseller
-- `/usr/share/parslinux/gnome-settings/start-parslinux-gnome.svg`: Başlatıcı (Dash to Panel) ana menü buton simgesi.
-- Arka planlar: `/usr/share/backgrounds/parslinux-default-light.svg` ve `dark.svg`.
+- `dconf/20-parslinux`: Dash to Panel uzantısının alt panel olarak hizalanması, şeffaflık oranları ve Pars Linux başlatıcı ikon dosyasının mutlak yolu.
+- `dconf/user`: Dconf profil tanımı. `user-db:user` ve `system-db:local` veritabanlarını birbirine bağlar.
+- `debian/parslinux-gnome-settings.gsettings-override`:
+  - `favorite-apps`: Sabitlenen uygulamalar (`org.parslinux.software.desktop` vb.)
+  - `font-name` & `monospace-font-name`: Yazı tipi aileleri.
+  - `icon-theme` & `gtk-theme`: Simge ve pencere teması.
+  - `button-layout`: Pencere butonlarının dizilişi (`appmenu:minimize,maximize,close`).
+- `etc/xdg/autostart/xdg-parslinux-templates-gnome.desktop`: GNOME oturumu açıldığında arka planda çalışan şablon betiği.
+- `usr/share/parslinux/gnome-settings/xdg-parslinux-templates-gnome/`:
+  - Python tabanlı şablon oluşturucu.
+  - Çok dilli gettext desteği (`po/`, `.mo`).
+  - ODT, ODS, ODP ve düz metin şablon kaynakları.
+
+---
+
+## 🔒 4. Çoklu Kullanıcı ve Güvenlik Uyumluluğu
+
+- Sistem geneli yapılandırmalar `/etc` ve `/usr` altında salt okunur olarak saklanır.
+- Kullanıcıların kendi özelleştirmeleri ev dizininde tutulur; paket güncellemelerinde kullanıcı tercihleri korunur.
+- Şablon mekanizması `~/.config/parslinux/gnome-templates` bayrak dosyasını denetleyerek kullanıcının mevcut dosyalarının üzerine asla yazmaz.
