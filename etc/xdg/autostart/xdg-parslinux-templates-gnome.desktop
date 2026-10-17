@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Gnome Templates
+Exec=/usr/bin/python3 /usr/share/parslinux/gnome-settings/xdg-parslinux-templates-gnome/xdg-parslinux-templates-gnome
+Type=Application
+StartupNotify=false
+NoDisplay=true
+NotShowIn=XFCE;KDE;
+OnlyShowIn=GNOME;
+X-GNOME-Autostart-enabled=true

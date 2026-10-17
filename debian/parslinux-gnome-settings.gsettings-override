@@ -1,0 +1,48 @@
+[org.gnome.shell]
+favorite-apps = [ 'firefox-esr.desktop', 'org.gnome.Nautilus.desktop', 'org.parslinux.software.desktop' ]
+enabled-extensions = [ 'ding@rastersoft.com', 'appindicatorsupport@rgcjonas.gmail.com', 'rounded-window-corners@yilozt', 'gtk3-theme-switcher@adwgtk3', 'dash-to-panel@jderose9.github.com', 'start-overlay-in-application-view@Hex_cz', 'date-menu-formatter@marcinjakubowski.github.com', 'blur-my-shell@aunetx', 'clipboard-indicator@tudmotu.com', 'gtk3-accent-sync@pardus.org.tr' ]
+
+[org.gnome.desktop.interface]
+font-name = 'Ubuntu 11'
+monospace-font-name = 'Ubuntu Mono 13'
+document-font-name = 'Ubuntu 11'
+gtk-theme = 'adw-gtk3'
+enable-hot-corners = false
+icon-theme = 'parslinux-gnome'
+
+[org.gnome.desktop.background]
+picture-uri='file:///usr/share/backgrounds/parslinux-default-light.svg'
+picture-uri-dark='file:///usr/share/backgrounds/parslinux-default-dark.svg'
+
+[org.gnome.desktop.wm.preferences]
+button-layout = 'appmenu:minimize,maximize,close'
+titlebar-font = 'Ubuntu Bold 11'
+resize-with-right-button = true
+
+[org.gtk.Settings.FileChooser]
+sort-directories-first = true
+
+[org.gnome.shell.extensions.ding]
+add-volumes-opposite = false
+icon-size = 'standard'
+
+[org.gnome.desktop.wm.keybindings]
+switch-applications = ['<Super>Tab']
+switch-applications-backward = ['<Super><Shift>Tab']
+switch-windows = ['<Alt>Tab']
+switch-windows-backward = ['<Alt><Shift>Tab']
+
+[org.gnome.desktop.peripherals.touchpad]
+tap-to-click=true
+
+[org.gnome.Console]
+theme='auto'
+
+[org.gnome.shell.extensions.date-menu-formatter]
+formatter = '02_original'
+font-size = 11
+pattern = 'kk:mm\\ndd.MM.y'
+apply-all-panels = true
+
+[org.parslinux.parslinux-gnome-greeter]
+layout-name = 'parslinux'

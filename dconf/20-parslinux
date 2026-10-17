@@ -1,0 +1,11 @@
+[org/gnome/shell/extensions/dash-to-panel]
+dot-color-dominant=true
+dot-style-unfocused='DASHES'
+group-apps=true
+overview-click-to-exit=true
+hide-overview-on-startup=true
+trans-use-custom-opacity=true
+trans-use-dynamic-opacity=true
+trans-panel-opacity=0.3
+trans-dynamic-anim-target=0.6
+show-apps-icon-file='/usr/share/parslinux/gnome-settings/start-parslinux-gnome.svg'

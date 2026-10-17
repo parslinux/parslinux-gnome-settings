@@ -1,0 +1,7 @@
+build/
+*.deb
+*.tar.gz
+*.mo
+__pycache__/
+.DS_Store
+*~
